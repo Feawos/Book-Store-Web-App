@@ -1,0 +1,30 @@
+﻿@page
+@model BookStore.Pages.PurchaseModel
+@{
+    ViewData["Title"] = "Purchase Book";
+}
+
+<h2>Purchase Book</h2>
+
+<div>
+    <h4>@Model.Book!.Title</h4>
+    <div>By: @Model.Book.Author</div>
+    <div>Price: €@Model.Book.Price.ToString("N2")</div>
+    <div>In Stock: @Model.Book.Stock</div>
+</div>
+
+<form method="post">
+    <div class="form-group">
+        <label asp-for="Purchase!.Quantity"></label>
+        <input asp-for="Purchase!.Quantity" class="form-control" />
+        <span asp-validation-for="Purchase!.Quantity" class="text-danger"></span>
+    </div>
+    <button type="submit"  asp-page="./OrderSummary" class="btn btn-primary">Buy</button>
+</form>
+
+@if (!string.IsNullOrEmpty(Model.ErrorMessage))
+{
+    <div class="alert alert-danger">
+        @Model.ErrorMessage
+    </div>
+}

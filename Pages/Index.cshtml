@@ -1,0 +1,35 @@
+﻿@page
+@model BookStore.Pages.IndexModel
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h2>Shop Books</h2>
+
+<!-- Displaying Books -->
+@if (Model.Books != null && Model.Books.Any())
+{
+    @foreach (var book in Model.Books)
+    {
+        <div class="container" style="background-color: rgba(138, 129, 133, 0.6); margin-top:50px; margin-bottom: 50px; padding: 20px; border-radius:10px;">
+            <div class="row">
+                <div class="col col-xs-6 col-lg-5">
+                    <img src="@book.Image" style="max-width: 250px; max-height: 250px;" />
+                </div>
+                <div class="col col-xs-6 col-lg-5">
+                    <h5><a asp-page="/Purchase" asp-route-id="@book.Id" style="color: black;">@book.Title</a></h5>
+                    <div>By: @book.Author</div>
+                    <div>Price: €@book.Price.ToString("N2")</div>
+                    <div>ISBN: @book.ISBN</div>
+                    <div>Category: @book.Category</div>
+                    <div>Quantity In stock: @book.Stock</div>
+                    <a asp-page="/Purchase" asp-route-id="@book.Id">Buy</a>
+                </div>
+            </div>
+        </div>
+    }
+}
+else
+{
+    <p>No books found.</p>
+}
